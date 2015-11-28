@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 28, 2015 1:33:23 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="mappings.User" table="user" catalog="ead">
+        <id name="iduser" type="java.lang.Integer">
+            <column name="iduser" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="userLogin" class="mappings.UserLogin" fetch="select">
+            <column name="user_login_idtable1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="userTypes" class="mappings.UserTypes" fetch="select">
+            <column name="user_types_iduser_types" not-null="true" />
+        </many-to-one>
+        <property name="fname" type="string">
+            <column name="fname" length="45" />
+        </property>
+        <property name="lname" type="string">
+            <column name="lname" length="45" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="45" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <property name="telNo" type="string">
+            <column name="tel_no" length="45" />
+        </property>
+        <property name="postalCode" type="string">
+            <column name="postal_code" length="45" />
+        </property>
+        <property name="country" type="string">
+            <column name="country" length="45" />
+        </property>
+        <set name="orderses" table="orders" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_iduser" not-null="true" />
+            </key>
+            <one-to-many class="mappings.Orders" />
+        </set>
+        <set name="saleses" table="sales" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_iduser" />
+            </key>
+            <one-to-many class="mappings.Sales" />
+        </set>
+    </class>
+</hibernate-mapping>

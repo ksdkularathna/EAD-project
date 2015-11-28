@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 28, 2015 1:33:23 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="mappings.Orders" table="orders" catalog="ead">
+        <id name="idorders" type="java.lang.Integer">
+            <column name="idorders" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="product" class="mappings.Product" fetch="select">
+            <column name="product_idproduct" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="mappings.User" fetch="select">
+            <column name="user_iduser" not-null="true" />
+        </many-to-one>
+        <property name="date" type="string">
+            <column name="date" length="45" />
+        </property>
+        <property name="amount" type="string">
+            <column name="amount" length="45" />
+        </property>
+        <property name="discount" type="string">
+            <column name="discount" length="45" />
+        </property>
+        <property name="quantity" type="string">
+            <column name="quantity" length="45" />
+        </property>
+        <set name="saleses" table="sales" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="orders_idorders" />
+            </key>
+            <one-to-many class="mappings.Sales" />
+        </set>
+    </class>
+</hibernate-mapping>

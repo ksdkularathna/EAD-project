@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 28, 2015 1:33:23 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="mappings.Sales" table="sales" catalog="ead">
+        <id name="idsales" type="java.lang.Integer">
+            <column name="idsales" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="orders" class="mappings.Orders" fetch="select">
+            <column name="orders_idorders" />
+        </many-to-one>
+        <many-to-one name="user" class="mappings.User" fetch="select">
+            <column name="user_iduser" />
+        </many-to-one>
+        <property name="cusName" type="string">
+            <column name="cus_name" length="45" />
+        </property>
+        <property name="productId" type="string">
+            <column name="product_id" length="45" />
+        </property>
+        <property name="engCategory" type="string">
+            <column name="eng_category" length="45" />
+        </property>
+        <property name="model" type="string">
+            <column name="model" length="45" />
+        </property>
+        <property name="cc" type="string">
+            <column name="cc" length="45" />
+        </property>
+        <property name="MType" type="string">
+            <column name="m_type" length="45" />
+        </property>
+        <property name="contactNo" type="string">
+            <column name="contact_no" length="45" />
+        </property>
+        <property name="quantity" type="string">
+            <column name="quantity" length="45" />
+        </property>
+        <property name="discount" type="string">
+            <column name="discount" length="45" />
+        </property>
+        <property name="price" type="string">
+            <column name="price" length="45" />
+        </property>
+        <property name="date" type="string">
+            <column name="date" length="45" />
+        </property>
+        <set name="salesReturns" table="sales_return" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sales_idsales" not-null="true" />
+            </key>
+            <one-to-many class="mappings.SalesReturn" />
+        </set>
+        <set name="distributions" table="distribution" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sales_idsales" not-null="true" />
+            </key>
+            <one-to-many class="mappings.Distribution" />
+        </set>
+    </class>
+</hibernate-mapping>

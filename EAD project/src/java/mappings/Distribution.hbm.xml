@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 28, 2015 1:33:23 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="mappings.Distribution" table="distribution" catalog="ead">
+        <id name="iddistribution" type="java.lang.Integer">
+            <column name="iddistribution" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="sales" class="mappings.Sales" fetch="select">
+            <column name="sales_idsales" not-null="true" />
+        </many-to-one>
+        <property name="destination" type="string">
+            <column name="destination" length="45" />
+        </property>
+        <property name="date" type="string">
+            <column name="date" length="45" />
+        </property>
+        <property name="charge" type="string">
+            <column name="charge" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>
